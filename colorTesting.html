@@ -3,25 +3,6 @@
 <link href='https://fonts.googleapis.com/css?family=Fira Mono' rel='stylesheet'>
 <style>
 :root {
-/* Unsure where I got these solarized colors */
-/*
---soBlack:rgb(0, 43, 54);
---soBoldBlack:rgb(101, 123, 131);
---soRed:rgb(220, 50, 47);
---soBoldRed:rgb(232, 115, 113);
---soGreen:rgb(133, 153, 0);
---soBoldGreen:rgb(199, 228, 0);
---soYellow:rgb(181, 137, 0);
---soBoldYellow:rgb(255, 193, 2);
---soBlue:rgb(38, 139, 210);
---soBoldBlue:rgb(99, 173, 227);
---soMagenta:rgb(108, 113, 196);
---soBoldMagenta:rgb(162, 165, 217);
---soCyan:rgb(42, 161, 152);
---soBoldCyan:rgb(71, 207, 197);
---soWhite:rgb(147, 161, 161);
---soBoldWhite:rgb(253, 246, 227);
-*/
 /* Corrected solarized values */
 --soBoldBlack:rgb(0, 43, 54);
 --soBoldYellow:rgb(101, 123, 131);
@@ -45,9 +26,11 @@
 background-color:var(--soBackground);
 background:url('http://bagelbyheart.com/CherryLow.png');
 background-size:cover;
+background-attachment:fixed;
 image-rendering: pixelated;
 color:var(--soForeground);
 font-family:'Fira Mono';
+font-size:10pt;
 }
 body {
  width: 47em;
@@ -87,9 +70,10 @@ a {
 
 .box {
  font-weight: bold;
- font-size: 8pt;
+ 
+ /*font-size: 8pt;*/
  display: inline-block;
- width: 23%;
+ width: 18%;
  text-align: center;
  border-style: solid;
  margin: 5px 0px 5px 0px;
@@ -196,33 +180,35 @@ button, select {
 </div>
 <div class="win">
 <h2>$LS_COLORS examples</h2>
+<p>The examples below are based on default linux bash dircolors and can generally be achieved with the following command:</p>
+<codeblock>eval "`dircolors`"</codeblock>
 <h3>File Types</h3>
 <p>
-<span style="color: var(--soForeground);">rs (reset to no color)</span><br />
-<span style="color: var(--soBoldBlue);">di (directory)</span><br />
-<span style="color: var(--soBoldCyan);">ln (symbolic link)</span><br />
-<span style="color: var(--soForeground);">mh (multi-hardlink)</span><br />
-<span style="color: var(--soYellow);">pi (named pipe, AKA FIFO)</span><br />
-<span style="color: var(--soBoldMagenta);">so (socket) do (door)</span><br />
-<span style="color: var(--soBoldYellow);">bd (block device) cd (character device)</span><br />
-<span style="color: var(--soBoldRed);">or (orphan symlink)</span><br />
-<span style="color: var(--soForeground);">mi (missing file)</span><br />
-<span style="color: var(--soWhite); background: var(--soRed);">su (set-user-ID)</span><br />
-<span style="color: var(--soBlack); background: var(--soYellow);">sg (set-group-ID)</span><br />
-<span style="color: var(--soBlack); background: var(--soRed);">ca (file with capability)</span><br />
-<span style="color: var(--soBlack); background: var(--soGreen);">tw (sticky and other-writable directory)</span><br />
-<span style="color: var(--soBlue); background: var(--soGreen);">ow (other-writable directory)</span><br />
-<span style="color: var(--soWhite); background: var(--soBlue);">st (sticky directory)</span><br />
-<span style="color: var(--soBoldGreen);">ex (executable file)</span>
+<span style="color: var(--soForeground);">0 rs (reset to no color)</span><br />
+<span style="color: var(--soBoldBlue);">01;34 di (directory)</span><br />
+<span style="color: var(--soBoldCyan);">01;36 ln (symbolic link)</span><br />
+<span style="color: var(--soForeground);">00 mh (multi-hardlink)</span><br />
+<span style="color: var(--soYellow);">40;33 pi (named pipe, AKA FIFO)</span><br />
+<span style="color: var(--soBoldMagenta);">01;35 so (socket) do (door)</span><br />
+<span style="color: var(--soBoldYellow);">40;33;01 bd (block device) cd (character device)</span><br />
+<span style="color: var(--soBoldRed);">40;31;01 or (orphan symlink)</span><br />
+<span style="color: var(--soForeground);">00 mi (missing file)</span><br />
+<span style="color: var(--soWhite); background: var(--soRed);">37;41 su (set-user-ID)</span><br />
+<span style="color: var(--soBlack); background: var(--soYellow);">30;43 sg (set-group-ID)</span><br />
+<span style="color: var(--soBlack); background: var(--soRed);">30;41 ca (file with capability)</span><br />
+<span style="color: var(--soBlack); background: var(--soGreen);">30;42 tw (sticky and other-writable directory)</span><br />
+<span style="color: var(--soBlue); background: var(--soGreen);">34;42 ow (other-writable directory)</span><br />
+<span style="color: var(--soWhite); background: var(--soBlue);">37;44 st (sticky directory)</span><br />
+<span style="color: var(--soBoldGreen);">01;32 ex (executable file)</span>
 </p>
 <h3>File Extensions</h3>
 <p>
 # Archive Extensions<br />
-<span style="color: var(--soBoldRed);">*.tar *.tgz *.arc *.arj *.taz *.lha *.lz4 *.lzh *.lzma *.tlz *.txz *.tzo *.t7z *.zip *.z *.Z *.dz *.gz *.lrz *.lz *.lzo *.xz *.zst *.tzst *.bz2 *.bz *.tbz *.tbz2 *.tz *.deb *.rpm *.jar *.war *.ear *.sar *.rar *.alz *.ace *.zoo *.cpio *.7z *.rz *.cab</span><br />
+<span style="color: var(--soBoldRed);">01;31 *.tar *.tgz *.arc *.arj *.taz *.lha *.lz4 *.lzh *.lzma *.tlz *.txz *.tzo *.t7z *.zip *.z *.Z *.dz *.gz *.lrz *.lz *.lzo *.xz *.zst *.tzst *.bz2 *.bz *.tbz *.tbz2 *.tz *.deb *.rpm *.jar *.war *.ear *.sar *.rar *.alz *.ace *.zoo *.cpio *.7z *.rz *.cab</span><br />
 # Image Extensions<br />
-<span style="color: var(--soBoldMagenta);">*.jpg *.jpeg *.mjpg *.mjpeg *.gif *.bmp *.pbm *.pgm *.ppm *.tga *.xbm *.xpm *.tif *.tiff *.png *.svg *.svgz *.mng *.pcx *.mov *.mpg *.mpeg *.m2v *.mkv *.webm *.ogm *.mp4 *.m4v *.mp4v *.vob *.qt *.nuv *.wmv *.asf *.rm *.rmvb *.flc *.avi *.fli *.flv *.gl *.dl *.xcf *.xwd *.yuv *.cgm *.emf *.ogv *.ogx</span><br />
+<span style="color: var(--soBoldMagenta);">01;35 *.jpg *.jpeg *.mjpg *.mjpeg *.gif *.bmp *.pbm *.pgm *.ppm *.tga *.xbm *.xpm *.tif *.tiff *.png *.svg *.svgz *.mng *.pcx *.mov *.mpg *.mpeg *.m2v *.mkv *.webm *.ogm *.mp4 *.m4v *.mp4v *.vob *.qt *.nuv *.wmv *.asf *.rm *.rmvb *.flc *.avi *.fli *.flv *.gl *.dl *.xcf *.xwd *.yuv *.cgm *.emf *.ogv *.ogx</span><br />
 # Audio Extensions<br />
-<span style="color: var(--soCyan);">*.aac *.au *.flac *.m4a *.mid *.midi *.mka *.mp3 *.mpc *.ogg *.ra *.wav *.oga *.opus *.spx *.xspf</span>
+<span style="color: var(--soCyan);">00;36 *.aac *.au *.flac *.m4a *.mid *.midi *.mka *.mp3 *.mpc *.ogg *.ra *.wav *.oga *.opus *.spx *.xspf</span>
 </p>
 </div>
 <div class="win">
@@ -334,7 +320,26 @@ function bgToggle() {
 clUpdate()
 }
 
+function hideSubs(){
+ items = this.parentElement.children
+ for (var i = 1; i < items.length; i++) {
+  cDisplay = getComputedStyle(items[i]).getPropertyValue("display")
+  oDisplay = getComputedStyle(items[i]).getPropertyValue("--oDisplay")
+  if (oDisplay === '') {
+   items[i].style.setProperty("--oDisplay",cDisplay)
+   items[i].style.setProperty("display","none")
+   }
+  else {
+   items[i].style.setProperty("display",oDisplay)
+   items[i].style.setProperty("--oDisplay",'')
+   }
+ }
+}
+
 function clInit() {
+ document.querySelectorAll("h2").forEach(function(item){
+  item.onclick = hideSubs;
+  })
  document.getElementById("soForeground").innerHTML = "White"
  document.getElementById("soBackground").innerHTML = "Black"
  document.getElementById("soCursor")
@@ -344,12 +349,12 @@ function clInit() {
   document.getElementById("so"+item).value = sColor
   document.getElementById("so"+item).setAttribute("onchange","clUpdate()")
   document.getElementById("so"+item).setAttribute("size","19")
-  document.getElementById(item).innerHTML = item+":"+oColor
+  document.getElementById(item).innerHTML = item+"="+oColor
  })
  mains.forEach(function(item) {
   sColor = getComputedStyle(element).getPropertyValue("--so"+item)
   oColor = sColor.replace(regexp,'$1').replaceAll(' ','')
-  document.getElementById(item).innerHTML = item+":"+oColor
+  document.getElementById(item).innerHTML = item+"Colour="+oColor
  })
  cTestUpdate()
 }
