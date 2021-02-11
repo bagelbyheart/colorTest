@@ -1,3 +1,7 @@
+<html>
+<head>
+<title>Bagelbyheart ColorTest Tool</title>
+</head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
 <link href='https://fonts.googleapis.com/css?family=Fira Mono' rel='stylesheet'>
@@ -70,10 +74,9 @@ a {
 
 .box {
  font-weight: bold;
- 
- /*font-size: 8pt;*/
+ font-size: 8pt;
  display: inline-block;
- width: 18%;
+ width: 12%;
  text-align: center;
  border-style: solid;
  margin: 5px 0px 5px 0px;
@@ -95,7 +98,7 @@ a {
 .boxfill {
  border-radius: 0px;
  margin:5px 0px 0px 0px;
- height: 7em;
+ height: 3em;
  border-style: solid none solid none;
  border-width: 1px;
 }
@@ -149,33 +152,50 @@ button, select {
 <div class="win">
 <h2>Main Colors</h2>
 <p>While Cursor color can be selected from any of the 16 ANSI colors further down, the foreground/background colors have been locked to provide consistency. These colors are based on whether you are using a Dark (White on Black) or Light (BoldBlack on BoldWhite) theme.</p>
-<div class="mbox cursor">Cursor<div class="boxfill" style='background-color: var(--soCursor);'></div>
-<select name="cursor">
-<option value="BoldMagenta">Placeholder</option>
-</select></div>
-<div class="mbox foreground">Foreground<div class="boxfill" style='background-color: var(--soForeground);'></div><span class="finput" id="soForeground">&nbsp</span></div>
-<div class="mbox background">Background<div class="boxfill" style='background-color: var(--soBackground);'></div><span class="finput" id="soBackground">&nbsp</span></div>
+
+<div class="mbox cursor">Cursor
+ <div class="boxfill" style='background-color: var(--soCursor);'></div>
+ <select name="cursor">
+  <option value="BoldMagenta">Placeholder</option>
+ </select>
+ </div>
+ 
+<div class="mbox foreground">Foreground
+ <div class="boxfill" style='background-color: var(--soForeground);'></div>
+ <span class="finput" id="soForeground"></span>
+ </div>
+ 
+<div class="mbox background">Background
+ <div class="boxfill" style='background-color: var(--soBackground);'></div>
+ <span class="finput" id="soBackground"></span>
+ </div>
 
 </div>
+
 <div class="win">
 <h2>AnsiColor Names to Values</h2>
 <p>You can edit this palette by changing the color values below. Each box accepts colorAPI values such as rgb(0,0,0) or #000000. Colors should update as you change the values present, but if not, click Update Colors at the top of the page.</p>
-<div class="box">Black<div class="boxfill" style='background-color: var(--soBlack);'></div><input type="text" id="soBlack" /></div>
-<div class="box">Red<div class="boxfill" style='background-color: var(--soRed);'></div><input type="text" id="soRed" /></div>
-<div class="box">Green<div class="boxfill" style='background-color: var(--soGreen);'></div><input type="text" id="soGreen" /></div>
-<div class="box">Yellow<div class="boxfill" style='background-color: var(--soYellow);'></div><input type="text" id="soYellow" /></div>
-<div class="box">Blue<div class="boxfill" style='background-color: var(--soBlue);'></div><input type="text" id="soBlue" /></div>
-<div class="box">Magenta<div class="boxfill" style='background-color: var(--soMagenta);'></div><input type="text" id="soMagenta" /></div>
-<div class="box">Cyan<div class="boxfill" style='background-color: var(--soCyan);'></div><input type="text" id="soCyan" /></div>
-<div class="box">White<div class="boxfill" style='background-color: var(--soWhite);'></div><input type="text" id="soWhite" /></div>
-<div class="box">BoldBlack<div class="boxfill" style='background-color: var(--soBoldBlack);'></div><input type="text" id="soBoldBlack" /></div>
-<div class="box">BoldRed<div class="boxfill" style='background-color: var(--soBoldRed);'></div><input type="text" id="soBoldRed" /></div>
-<div class="box">BoldGreen<div class="boxfill" style='background-color: var(--soBoldGreen);'></div><input type="text" id="soBoldGreen" /></div>
-<div class="box">BoldYellow<div class="boxfill" style='background-color: var(--soBoldYellow);'></div><input type="text" id="soBoldYellow" /></div>
-<div class="box">BoldBlue<div class="boxfill" style='background-color: var(--soBoldBlue);'></div><input type="text" id="soBoldBlue" /></div>
-<div class="box">BoldMagenta<div class="boxfill" style='background-color: var(--soBoldMagenta);'></div><input type="text" id="soBoldMagenta" /></div>
-<div class="box">BoldCyan<div class="boxfill" style='background-color: var(--soBoldCyan);'></div><input type="text" id="soBoldCyan" /></div>
-<div class="box">BoldWhite<div class="boxfill" style='background-color: var(--soBoldWhite);'></div><input type="text" id="soBoldWhite" /></div></div>
+
+<div style="padding:0; margin: 0; width:100%;">
+<div class="box">Black<div class="boxfill" style='background-color: var(--soBlack);'></div><input type="text" id="soBlack" /></div><!--
+--><div class="box">Red<div class="boxfill" style='background-color: var(--soRed);'></div><input type="text" id="soRed" /></div><!--
+--><div class="box">Green<div class="boxfill" style='background-color: var(--soGreen);'></div><input type="text" id="soGreen" /></div><!--
+--><div class="box">Yellow<div class="boxfill" style='background-color: var(--soYellow);'></div><input type="text" id="soYellow" /></div><!--
+--><div class="box">Blue<div class="boxfill" style='background-color: var(--soBlue);'></div><input type="text" id="soBlue" /></div><!--
+--><div class="box">Magenta<div class="boxfill" style='background-color: var(--soMagenta);'></div><input type="text" id="soMagenta" /></div><!--
+--><div class="box">Cyan<div class="boxfill" style='background-color: var(--soCyan);'></div><input type="text" id="soCyan" /></div><!--
+--><div class="box">White<div class="boxfill" style='background-color: var(--soWhite);'></div><input type="text" id="soWhite" /></div><!--
+--><div class="box">BoldBlack<div class="boxfill" style='background-color: var(--soBoldBlack);'></div><input type="text" id="soBoldBlack" /></div><!--
+--><div class="box">BoldRed<div class="boxfill" style='background-color: var(--soBoldRed);'></div><input type="text" id="soBoldRed" /></div><!--
+--><div class="box">BoldGreen<div class="boxfill" style='background-color: var(--soBoldGreen);'></div><input type="text" id="soBoldGreen" /></div><!--
+--><div class="box">BoldYellow<div class="boxfill" style='background-color: var(--soBoldYellow);'></div><input type="text" id="soBoldYellow" /></div><!--
+--><div class="box">BoldBlue<div class="boxfill" style='background-color: var(--soBoldBlue);'></div><input type="text" id="soBoldBlue" /></div><!--
+--><div class="box">BoldMagenta<div class="boxfill" style='background-color: var(--soBoldMagenta);'></div><input type="text" id="soBoldMagenta" /></div><!--
+--><div class="box">BoldCyan<div class="boxfill" style='background-color: var(--soBoldCyan);'></div><input type="text" id="soBoldCyan" /></div><!--
+--><div class="box">BoldWhite<div class="boxfill" style='background-color: var(--soBoldWhite);'></div><input type="text" id="soBoldWhite" /></div>
+</div>
+
+</div>
 
 </div>
 <div class="win">
@@ -211,6 +231,7 @@ button, select {
 <span style="color: var(--soCyan);">00;36 *.aac *.au *.flac *.m4a *.mid *.midi *.mka *.mp3 *.mpc *.ogg *.ra *.wav *.oga *.opus *.spx *.xspf</span>
 </p>
 </div>
+
 <div class="win">
 <h2>.minttyrc File</h2>
 <p>Copy and paste the text below into your ~/.minttyrc file in order to use this color theme.</p>
@@ -359,3 +380,4 @@ function clInit() {
  cTestUpdate()
 }
 </script>
+</html>
