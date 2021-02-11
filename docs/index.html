@@ -25,6 +25,8 @@
 --soBlack:rgb(7, 54, 66);
 --soBoldGreen:rgb(88, 110, 117);
 --soBackground:var(--soBlack);
+--soHighlight:var(--soBoldBlack);
+--soAccent:var(--soBoldWhite);
 --soForeground:var(--soWhite);
 --soCursor:var(--soBoldMagenta);
 background-color:var(--soBackground);
@@ -36,6 +38,8 @@ color:var(--soForeground);
 font-family:'Fira Mono';
 font-size:10pt;
 }
+
+
 body {
  width: 47em;
 }
@@ -92,7 +96,7 @@ a {
  vertical-align:top;
  font-weight: bold;
  display: inline-block;
- width: 19%;
+ width: 19.5%;
  text-align: center;
  border-style: solid;
  margin: 5px 0px 5px 0px;
@@ -165,7 +169,18 @@ h1, h2, h3, h4, h5 {
  margin:0;
  padding: 4px;
  background-color:var(--soCursor);
+ -webkit-user-select: none; /* Safari */        
+ -moz-user-select: none; /* Firefox */
+ -ms-user-select: none; /* IE10+/Edge */
+ user-select: none; /* Standard */
  }
+ 
+::selection {
+  background-color:var(--soHighlight);
+  color:var(--soAccent);
+  mix-blend-mode:difference;
+}
+
 
 </style>
 <body onload="clInit()">
@@ -177,6 +192,7 @@ h1, h2, h3, h4, h5 {
 <a href="https://coolors.co/contrast-checker/">Check Contrast</a>
 </p>
 </div>
+
 <div class="win"><!-- Main Colors -->
 <div class="fl">-</div>
 <h2>Main Colors</h2>
@@ -194,9 +210,19 @@ h1, h2, h3, h4, h5 {
  <span class="finput" id="soForeground"></span>
  </div><!-- gap removal trick ;-)
  
+--><div class="mbox accent">Accent
+ <div class="boxfill" style='background-color: var(--soAccent);'></div>
+ <span class="finput" id="soAccent"></span>
+ </div><!-- gap removal trick ;-)
+ 
 --><div class="mbox background">Background
  <div class="boxfill" style='background-color: var(--soBackground);'></div>
  <span class="finput" id="soBackground"></span>
+ </div><!-- gap removal trick ;-)
+ 
+--><div class="mbox highlight">Highlight
+ <div class="boxfill" style='background-color: var(--soHighlight);'></div>
+ <span class="finput" id="soHighlight"></span>
  </div>
 
 </div>
@@ -304,10 +330,6 @@ function hexToRgb(hex) {
    : hex;
 }
 
-function rgbToHex(r, g, b) {
-  return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-}
-
 function rgbToHex(rgbStr) {
   rStr = rgbStr.replace(regexp,'$1').replaceAll(' ','').split(',')
   r = parseInt(rStr[0])
@@ -354,20 +376,24 @@ function bgToggle() {
  black = getComputedStyle(item).getPropertyValue("--soBlack") 
  console.log(background+","+boldWhite+","+black)
  if (background === black) { 
-  /*item.style.setProperty("--soBackground","var(--soBoldWhite)")
-  item.style.setProperty("--soForeground","var(--soBlack)")*/
-  element.style.setProperty("--soBackground","var(--soBoldWhite)")
-  element.style.setProperty("--soForeground","var(--soBoldBlack)")
-  document.getElementById("soForeground").innerHTML = "BoldBlack"
-  document.getElementById("soBackground").innerHTML = "BoldWhite"
+  element.style.setProperty("--soBackground","var(--soWhite)")
+  element.style.setProperty("--soForeground","var(--soBlack)")
+  element.style.setProperty("--soHighlight","var(--soBoldWhite)")
+  element.style.setProperty("--soAccent","var(--soBoldBlack)")
+  document.getElementById("soForeground").innerHTML = "Black"
+  document.getElementById("soBackground").innerHTML = "White"
+  document.getElementById("soAccent").innerHTML = "BoldBlack"
+  document.getElementById("soHighlight").innerHTML = "BoldWhite"
   }
  else { 
-  /*item.style.setProperty("--soBackground","var(--soBlack)");
-  item.style.setProperty("--soForeground","var(--soWhite)");*/
   element.style.setProperty("--soBackground","var(--soBlack)");
   element.style.setProperty("--soForeground","var(--soWhite)");
+  element.style.setProperty("--soHighlight","var(--soBoldBlack)")
+  element.style.setProperty("--soAccent","var(--soBoldWhite)")
   document.getElementById("soForeground").innerHTML = "White"
   document.getElementById("soBackground").innerHTML = "Black"
+  document.getElementById("soAccent").innerHTML = "BoldWhite"
+  document.getElementById("soHighlight").innerHTML = "BoldBlack"
   }
 clUpdate()
 }
@@ -394,6 +420,8 @@ function clInit() {
   })
  document.getElementById("soForeground").innerHTML = "White"
  document.getElementById("soBackground").innerHTML = "Black"
+ document.getElementById("soAccent").innerHTML = "BoldWhite"
+ document.getElementById("soHighlight").innerHTML = "BoldBlack"
  document.getElementById("soCursor")
  colors.forEach(function(item) {
   sColor = getComputedStyle(element).getPropertyValue("--so"+item)
