@@ -56,6 +56,10 @@ div {
  margin: 1em;
 }
 
+.win {
+ border:solid 2px var(--soForeground);
+}
+
 .bold {
  font-weight:bold;
  font-size: larger;
@@ -85,9 +89,10 @@ a {
 }
 
 .mbox {
+ vertical-align:top;
  font-weight: bold;
  display: inline-block;
- width: 32%;
+ width: 19%;
  text-align: center;
  border-style: solid;
  margin: 5px 0px 5px 0px;
@@ -104,7 +109,7 @@ a {
 }
 
 .mbox .boxfill {
- height: 8em;
+ height: 5em;
 }
 
 input {
@@ -139,17 +144,41 @@ button, select {
  padding: 5px;
 }
 
+p, pre {
+ margin:1em;
+}
+
+h1, h2, h3, h4, h5 {
+ border: solid 1px var(--soCursor);
+ border-left: solid 22px var(--soCursor);
+ margin:0;
+ padding: 4px 0px 4px 8px;
+ background-color:var(--soForeground);
+ color:var(--soBackground);
+}
+
+.fl { 
+ font-size: 1.5em;
+ border:solid 1px var(--soCursor);
+ font-weight: bold;
+ float:left;
+ margin:0;
+ padding: 4px;
+ background-color:var(--soCursor);
+ }
+
 </style>
 <body onload="clInit()">
 
-<div class="win">
+<div class="win"><!-- Control Bar -->
 <p>
 <span onclick="bgToggle()" class="bold">Dark/Light Mode</span> |
 <span onclick="clUpdate()" class="bold">Update Colors</span> | 
 <a href="https://coolors.co/contrast-checker/">Check Contrast</a>
 </p>
 </div>
-<div class="win">
+<div class="win"><!-- Main Colors -->
+<div class="fl">-</div>
 <h2>Main Colors</h2>
 <p>While Cursor color can be selected from any of the 16 ANSI colors further down, the foreground/background colors have been locked to provide consistency. These colors are based on whether you are using a Dark (White on Black) or Light (BoldBlack on BoldWhite) theme.</p>
 
@@ -158,22 +187,23 @@ button, select {
  <select name="cursor">
   <option value="BoldMagenta">Placeholder</option>
  </select>
- </div>
+ </div><!-- gap removal trick ;-)
  
-<div class="mbox foreground">Foreground
+--><div class="mbox foreground">Foreground
  <div class="boxfill" style='background-color: var(--soForeground);'></div>
  <span class="finput" id="soForeground"></span>
- </div>
+ </div><!-- gap removal trick ;-)
  
-<div class="mbox background">Background
+--><div class="mbox background">Background
  <div class="boxfill" style='background-color: var(--soBackground);'></div>
  <span class="finput" id="soBackground"></span>
  </div>
 
 </div>
 
-<div class="win">
-<h2>AnsiColor Names to Values</h2>
+<div class="win"><!-- ANSI Names -->
+<div class="fl">-</div>
+<h2>ANSI Color Names to Values</h2>
 <p>You can edit this palette by changing the color values below. Each box accepts colorAPI values such as rgb(0,0,0) or #000000. Colors should update as you change the values present, but if not, click Update Colors at the top of the page.</p>
 
 <div style="padding:0; margin: 0; width:100%;">
@@ -197,11 +227,11 @@ button, select {
 
 </div>
 
-</div>
-<div class="win">
+<div class="win"><!-- LS_COLORS -->
+<div class="fl">-</div>
 <h2>$LS_COLORS examples</h2>
 <p>The examples below are based on default linux bash dircolors and can generally be achieved with the following command:</p>
-<codeblock>eval "`dircolors`"</codeblock>
+<pre>eval "`dircolors`"</pre>
 <h3>File Types</h3>
 <p>
 <span style="color: var(--soForeground);">0 rs (reset to no color)</span><br />
@@ -232,7 +262,8 @@ button, select {
 </p>
 </div>
 
-<div class="win">
+<div class="win"><!-- .minttyrc -->
+<div class="fl">-</div>
 <h2>.minttyrc File</h2>
 <p>Copy and paste the text below into your ~/.minttyrc file in order to use this color theme.</p>
 <p>
@@ -343,7 +374,7 @@ clUpdate()
 
 function hideSubs(){
  items = this.parentElement.children
- for (var i = 1; i < items.length; i++) {
+ for (var i = 2; i < items.length; i++) {
   cDisplay = getComputedStyle(items[i]).getPropertyValue("display")
   oDisplay = getComputedStyle(items[i]).getPropertyValue("--oDisplay")
   if (oDisplay === '') {
@@ -358,7 +389,7 @@ function hideSubs(){
 }
 
 function clInit() {
- document.querySelectorAll("h2").forEach(function(item){
+ document.querySelectorAll(".fl").forEach(function(item){
   item.onclick = hideSubs;
   })
  document.getElementById("soForeground").innerHTML = "White"
