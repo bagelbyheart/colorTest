@@ -191,11 +191,18 @@ h1, h2, h3, h4, h5 {
 }
 
 .head {
+    /*mix-blend-mode: difference;*/
     position: fixed;
+    padding:0;
     margin: 0;
     margin-top: -1em;
     width: 100%;
-    border-bottom: solid 2px var(--soForeground);
+}
+
+.head h3 {
+ padding:1em;
+ background-color:var(--soBackround);
+ color:var(--soForeground);
 }
  
 ::selection {
@@ -216,17 +223,18 @@ h1, h2, h3, h4, h5 {
 -->
 
 <div class="head"><!-- Control Bar -->
-<p>
+<h3>
 <span onclick="bgToggle()" class="bold">Dark/Light Mode</span> |
 <span onclick="clUpdate()" class="bold">Update Colors</span> | 
 <a href="https://coolors.co/contrast-checker/">Check Contrast</a>
-</p>
+</h3>
+<div id="picker"></div>
 </div>
 
-<div style="padding:.3em;">
-<p class="bold">
-test
-</p>
+<div style="padding: .9em;">
+
+Header
+
 </div>
 
 <div class="win"><!-- Main Colors -->
