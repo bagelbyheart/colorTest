@@ -189,6 +189,14 @@ h1, h2, h3, h4, h5 {
  margin-top:1em;
  padding:0;
 }
+
+.head {
+    position: fixed;
+    margin: 0;
+    margin-top: -1em;
+    width: 100%;
+    border-bottom: solid 2px var(--soForeground);
+}
  
 ::selection {
   background-color:var(--soHighlight);
@@ -200,16 +208,24 @@ h1, h2, h3, h4, h5 {
 </style>
 <body onload="clInit()">
 
+<!--
 <div id="picker">
 <div class="fl">-</div>
 <h2>Color Picker</h2>
 </div>
+-->
 
-<div class="win"><!-- Control Bar -->
+<div class="head"><!-- Control Bar -->
 <p>
 <span onclick="bgToggle()" class="bold">Dark/Light Mode</span> |
 <span onclick="clUpdate()" class="bold">Update Colors</span> | 
 <a href="https://coolors.co/contrast-checker/">Check Contrast</a>
+</p>
+</div>
+
+<div style="padding:.3em;">
+<p class="bold">
+test
 </p>
 </div>
 
@@ -348,11 +364,11 @@ var colorPicker = new iro.ColorPicker('#picker', {
    width: parseInt(getComputedStyle(document.querySelector('.win')).getPropertyValue("width")),
    borderColor: getComputedStyle(element).getPropertyValue("--soForeground"),
    layout: [
-    { 
+/*    { 
       component: iro.ui.Wheel,
       options: { }
     },
-    {
+*/    {
       component: iro.ui.Slider,
       options: { sliderType: 'hue' }
 	},

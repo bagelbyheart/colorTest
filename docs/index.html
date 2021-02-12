@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
 <link href='https://fonts.googleapis.com/css?family=Fira Mono' rel='stylesheet'>
+<script src='https://www.w3schools.com/lib/w3color.js' ></script>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 <style>
 :root {
 /* Corrected solarized values */
@@ -41,6 +43,7 @@ font-size:10pt;
 
 
 body {
+ margin:0;
  width: 47em;
 }
 
@@ -175,6 +178,26 @@ h1, h2, h3, h4, h5 {
  user-select: none; /* Standard */
  }
  
+#picker {
+ border:solid 2px var(--soForeground);
+ position:fixed;
+ margin:0 1em;
+}
+
+.IroColorPicker {
+ margin:0;
+ margin-top:1em;
+ padding:0;
+}
+
+.head {
+    position: fixed;
+    margin: 0;
+    margin-top: -1em;
+    width: 100%;
+    border-bottom: solid 2px var(--soForeground);
+}
+ 
 ::selection {
   background-color:var(--soHighlight);
   color:var(--soAccent);
@@ -185,11 +208,24 @@ h1, h2, h3, h4, h5 {
 </style>
 <body onload="clInit()">
 
-<div class="win"><!-- Control Bar -->
+<!--
+<div id="picker">
+<div class="fl">-</div>
+<h2>Color Picker</h2>
+</div>
+-->
+
+<div class="head"><!-- Control Bar -->
 <p>
 <span onclick="bgToggle()" class="bold">Dark/Light Mode</span> |
 <span onclick="clUpdate()" class="bold">Update Colors</span> | 
 <a href="https://coolors.co/contrast-checker/">Check Contrast</a>
+</p>
+</div>
+
+<div style="padding:.3em;">
+<p class="bold">
+test
 </p>
 </div>
 
@@ -323,47 +359,50 @@ mains = ["Foreground","Background","Cursor"]
 
 let regexp = /.*\((.*)\)/;
 
-function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ?   
-   "rgb("+parseInt(result[1], 16)+", "+parseInt(result[2], 16)+", "+parseInt(result[3], 16)+")"
-   : hex;
-}
-
-function rgbToHex(rgbStr) {
-  rStr = rgbStr.replace(regexp,'$1').replaceAll(' ','').split(',')
-  r = parseInt(rStr[0])
-  g = parseInt(rStr[1])
-  b = parseInt(rStr[2])
-  return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-}
-
-function hexToMtt(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ?   
-   parseInt(result[1], 16)+","+parseInt(result[2], 16)+","+parseInt(result[3], 16)
-   : hex;
-}
+var colorPicker = new iro.ColorPicker('#picker', {
+   borderWidth: 2,
+   width: parseInt(getComputedStyle(document.querySelector('.win')).getPropertyValue("width")),
+   borderColor: getComputedStyle(element).getPropertyValue("--soForeground"),
+   layout: [
+/*    { 
+      component: iro.ui.Wheel,
+      options: { }
+    },
+*/    {
+      component: iro.ui.Slider,
+      options: { sliderType: 'hue' }
+	},
+    {
+      component: iro.ui.Slider,
+      options: { sliderType: 'value' }
+	},
+    {
+      component: iro.ui.Slider,
+      options: { sliderType: 'saturation' }
+	},
+  ],
+ color: getComputedStyle(element).getPropertyValue("--soCursor")
+});
 
 function cTestUpdate() {
- cForeground = rgbToHex(getComputedStyle(element).getPropertyValue("--soForeground"))
- cBackground = rgbToHex(getComputedStyle(element).getPropertyValue("--soBackground"))
+ cForeground = w3color(getComputedStyle(element).getPropertyValue("--soForeground")).toHexString().replace('#','')
+ cBackground = w3color(getComputedStyle(element).getPropertyValue("--soBackground")).toHexString().replace('#','')
  document.querySelectorAll("a")[0].setAttribute("href","https://coolors.co/contrast-checker/"+cForeground+"-"+cBackground)
 }
 
 function clUpdate() {
  colors.forEach(function(item) {
-  nColor = document.getElementById("so"+item).value
-  oColor = nColor.replace(regexp,'$1').replaceAll(' ','')
-  mttColor = hexToMtt(oColor)
-  element.style.setProperty('--so'+item,nColor)
+  srcColor = document.getElementById("so"+item).value
+  objColor = w3color(srcColor)
+  mttColor = objColor.toRgbString().replace(regexp,'$1').replaceAll(' ','')
+  element.style.setProperty('--so'+item,objColor.toRgbString())
   document.getElementById(item).innerHTML = item+":"+mttColor
   })
  mains.forEach(function(item) {
   iSpan = document.getElementById(item)
-  sColor = getComputedStyle(iSpan).getPropertyValue("--so"+item)
-  oColor = sColor.replace(regexp,'$1').replaceAll(' ','')
-  mttColor = hexToMtt(oColor)
+  srcColor = getComputedStyle(iSpan).getPropertyValue("--so"+item)
+  objColor = w3color(srcColor)
+  mttColor = objColor.toRgbString().replace(regexp,'$1').replaceAll(' ','')
   iSpan.innerHTML = item+":"+mttColor
  })
  cTestUpdate()
