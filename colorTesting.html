@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
 <link href='https://fonts.googleapis.com/css?family=Fira Mono' rel='stylesheet'>
+<script src='https://www.w3schools.com/lib/w3color.js' ></script>
 <style>
 :root {
 /* Corrected solarized values */
@@ -323,47 +324,25 @@ mains = ["Foreground","Background","Cursor"]
 
 let regexp = /.*\((.*)\)/;
 
-function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ?   
-   "rgb("+parseInt(result[1], 16)+", "+parseInt(result[2], 16)+", "+parseInt(result[3], 16)+")"
-   : hex;
-}
-
-function rgbToHex(rgbStr) {
-  rStr = rgbStr.replace(regexp,'$1').replaceAll(' ','').split(',')
-  r = parseInt(rStr[0])
-  g = parseInt(rStr[1])
-  b = parseInt(rStr[2])
-  return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-}
-
-function hexToMtt(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ?   
-   parseInt(result[1], 16)+","+parseInt(result[2], 16)+","+parseInt(result[3], 16)
-   : hex;
-}
-
 function cTestUpdate() {
- cForeground = rgbToHex(getComputedStyle(element).getPropertyValue("--soForeground"))
- cBackground = rgbToHex(getComputedStyle(element).getPropertyValue("--soBackground"))
+ cForeground = w3color(getComputedStyle(element).getPropertyValue("--soForeground")).toHexString().replace('#','')
+ cBackground = w3color(getComputedStyle(element).getPropertyValue("--soBackground")).toHexString().replace('#','')
  document.querySelectorAll("a")[0].setAttribute("href","https://coolors.co/contrast-checker/"+cForeground+"-"+cBackground)
 }
 
 function clUpdate() {
  colors.forEach(function(item) {
-  nColor = document.getElementById("so"+item).value
-  oColor = nColor.replace(regexp,'$1').replaceAll(' ','')
-  mttColor = hexToMtt(oColor)
-  element.style.setProperty('--so'+item,nColor)
+  srcColor = document.getElementById("so"+item).value
+  objColor = w3color(srcColor)
+  mttColor = objColor.toRgbString().replace(regexp,'$1').replaceAll(' ','')
+  element.style.setProperty('--so'+item,objColor.toRgbString())
   document.getElementById(item).innerHTML = item+":"+mttColor
   })
  mains.forEach(function(item) {
   iSpan = document.getElementById(item)
-  sColor = getComputedStyle(iSpan).getPropertyValue("--so"+item)
-  oColor = sColor.replace(regexp,'$1').replaceAll(' ','')
-  mttColor = hexToMtt(oColor)
+  srcColor = getComputedStyle(iSpan).getPropertyValue("--so"+item)
+  objColor = w3color(srcColor)
+  mttColor = objColor.toRgbString().replace(regexp,'$1').replaceAll(' ','')
   iSpan.innerHTML = item+":"+mttColor
  })
  cTestUpdate()
